@@ -1,0 +1,28 @@
+{
+  "name": "alephium-web3-rollup-test",
+  "version": "1.0.0",
+  "description": "Test Alephium Web3 with Rollup",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "rollup -c -w"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "module",
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@types/node": "^22.15.17",
+    "rollup": "^3.0.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-serve": "^2.0.0",
+    "tslib": "^2.8.1",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@alephium/web3": "^1.11.7"
+  }
+}
