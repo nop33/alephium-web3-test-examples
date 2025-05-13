@@ -10,7 +10,7 @@ async function main() {
   try {
     // Query the balance
     const balance = await provider.addresses.getAddressesAddressBalance(testAddress);
-    console.log("Balance:", balance);
+    console.log("Balance:", balance.balanceHint);
   } catch (error) {
     console.error("Error:", error);
   }
