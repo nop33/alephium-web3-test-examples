@@ -24,22 +24,45 @@
     </style>
   </head>
   <body>
-    <h1>Alephium Web3 Browser Test</h1>
-    <div id="result">Loading...</div>
+    <h1>@alephium/web3 Browser Test</h1>
+    <div id="result-umd">Loading UMD...</div>
+    <div id="result-esm">Loading ESM...</div>
 
     <script src="./node_modules/@alephium/web3/dist/alephium-web3.min.js"></script>
     <script>
       async function main() {
-        const resultDiv = document.getElementById("result");
+        const resultDiv = document.getElementById("result-umd");
 
         try {
           const provider = new alephium.NodeProvider("https://node.mainnet.alephium.org");
           const testAddress = "1DZiFFX6fnSHuLnnmtBMUWeELWvnhRudYfzb17HYuV9aW";
 
           const balance = await provider.addresses.getAddressesAddressBalance(testAddress);
-          resultDiv.textContent = "Balance: " + JSON.stringify(balance, null, 2);
+          resultDiv.textContent = "✅ Balance through UMD: " + balance.balanceHint;
         } catch (error) {
-          resultDiv.textContent = "Error: " + error.message;
+          resultDiv.textContent = "❌ Error: " + error.message;
+          resultDiv.classList.add("error");
+        }
+      }
+
+      main();
+    </script>
+
+    <script type="module">
+      // Doesn't work because @alephium/web3/dist/src/index.js is CJS, not ESM
+      import { NodeProvider } from "./node_modules/@alephium/web3/dist/src/index.js";
+
+      async function main() {
+        const resultDiv = document.getElementById("result-esm");
+
+        try {
+          const provider = new NodeProvider("https://node.mainnet.alephium.org");
+          const testAddress = "1DZiFFX6fnSHuLnnmtBMUWeELWvnhRudYfzb17HYuV9aW";
+
+          const balance = await provider.addresses.getAddressesAddressBalance(testAddress);
+          resultDiv.textContent = "✅ Balance through ESM: " + balance.balanceHint;
+        } catch (error) {
+          resultDiv.textContent = "❌ Error: " + error.message;
           resultDiv.classList.add("error");
         }
       }
