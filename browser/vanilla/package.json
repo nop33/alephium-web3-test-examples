@@ -1,0 +1,18 @@
+{
+  "name": "vanilla",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server . -p 8080"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@alephium/web3": "^1.7.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alephium Web3 Browser Test</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      #result {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        white-space: pre-wrap;
+      }
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Alephium Web3 Browser Test</h1>
+    <div id="result">Loading...</div>
+
+    <script src="./node_modules/@alephium/web3/dist/alephium-web3.min.js"></script>
+    <script>
+      async function main() {
+        const resultDiv = document.getElementById("result");
+
+        try {
+          const provider = new alephium.NodeProvider("https://node.mainnet.alephium.org");
+          const testAddress = "1DZiFFX6fnSHuLnnmtBMUWeELWvnhRudYfzb17HYuV9aW";
+
+          const balance = await provider.addresses.getAddressesAddressBalance(testAddress);
+          resultDiv.textContent = "Balance: " + JSON.stringify(balance, null, 2);
+        } catch (error) {
+          resultDiv.textContent = "Error: " + error.message;
+          resultDiv.classList.add("error");
+        }
+      }
+
+      main();
+    </script>
+  </body>
+</html>
