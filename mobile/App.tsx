@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NodeProvider } from "@alephium/web3";
+import { PrivateKeyWallet } from "@alephium/web3-wallet";
 
 export default function App() {
   const [balance, setBalance] = useState<string | null>(null);
+  const [walletAddress, setWalletAddress] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -23,7 +25,13 @@ export default function App() {
         }
       }
     };
+
     fetchBalance();
+
+    const wallet = new PrivateKeyWallet({
+      privateKey: "a642942e67258589cd2b1822c631506632db5a12aabcf413604e785300d762a5",
+    });
+    setWalletAddress(wallet.address);
   }, []);
 
   return (
@@ -31,6 +39,7 @@ export default function App() {
       <Text style={styles.title}>@alephium/web3 React Native + Expo</Text>
       <Text style={styles.subtitle}>Test address: 1DZiFFX6fnSHuLnnmtBMUWeELWvnhRudYfzb17HYuV9aW</Text>
       {balance && <Text style={styles.result}>✅ Balance: {balance}</Text>}
+      {walletAddress && <Text style={styles.result}>✅ Wallet address: {walletAddress}</Text>}
       {error && <Text style={styles.resultError}>❌ Error: {error}</Text>}
       {!balance && !error && <Text style={styles.result}>Loading...</Text>}
       <StatusBar style="auto" />

@@ -10,14 +10,17 @@
   },
   "dependencies": {
     "@alephium/web3": "^1.11.7",
+    "@alephium/web3-wallet": "^1.11.7",
+    "@expo/metro-runtime": "~5.0.4",
+    "@react-native/metro-config": "^0.79.2",
+    "buffer": "^6.0.3",
     "expo": "~53.0.9",
     "expo-status-bar": "~2.2.3",
     "react": "19.0.0",
+    "react-dom": "19.0.0",
     "react-native": "0.79.2",
     "react-native-get-random-values": "^1.11.0",
-    "react-dom": "19.0.0",
-    "react-native-web": "^0.20.0",
-    "@expo/metro-runtime": "~5.0.4"
+    "react-native-web": "^0.20.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
