@@ -4,6 +4,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NodeProvider } from "@alephium/web3";
 import { PrivateKeyWallet } from "@alephium/web3-wallet";
+// import { AlephiumWalletProvider, useWalletConfig } from "@alephium/web3-react";
 
 export default function App() {
   const [balance, setBalance] = useState<string | null>(null);
@@ -43,9 +44,23 @@ export default function App() {
       {error && <Text style={styles.resultError}>❌ Error: {error}</Text>}
       {!balance && !error && <Text style={styles.result}>Loading...</Text>}
       <StatusBar style="auto" />
+
+      {/* <AlephiumWalletProvider theme="retro" network="devnet" addressGroup={0}>
+        <TestProvider />
+      </AlephiumWalletProvider> */}
     </View>
   );
 }
+
+// const TestProvider = () => {
+//   const config = useWalletConfig();
+
+//   return (
+//     <View>
+//       <Text>✅ Network: {config?.network}</Text>
+//     </View>
+//   );
+// };
 
 const styles = StyleSheet.create({
   container: {
