@@ -25,13 +25,15 @@
   </head>
   <body>
     <h1>@alephium/web3 Browser Test</h1>
-    <div id="result-umd">Loading UMD...</div>
-    <div id="result-esm">Loading ESM...</div>
+    <div id="result-web3-umd">Loading @alephium/web3 as UMD...</div>
+    <div id="result-web3-esm">Loading @alephium/web3 as ESM...</div>
+    <div id="result-web3-wallet-umd">Loading @alephium/web3-wallet as UMD...</div>
+    <div id="result-web3-wallet-esm">Loading @alephium/web3-wallet as ESM...</div>
 
     <script src="./node_modules/@alephium/web3/dist/alephium-web3.min.js"></script>
     <script>
       async function main() {
-        const resultDiv = document.getElementById("result-umd");
+        const resultDiv = document.getElementById("result-web3-umd");
 
         try {
           const provider = new alephium.NodeProvider("https://node.mainnet.alephium.org");
@@ -53,7 +55,7 @@
       import { NodeProvider } from "./node_modules/@alephium/web3/dist/src/index.js";
 
       async function main() {
-        const resultDiv = document.getElementById("result-esm");
+        const resultDiv = document.getElementById("result-web3-esm");
 
         try {
           const provider = new NodeProvider("https://node.mainnet.alephium.org");
@@ -61,6 +63,45 @@
 
           const balance = await provider.addresses.getAddressesAddressBalance(testAddress);
           resultDiv.textContent = "✅ Balance through ESM: " + balance.balanceHint;
+        } catch (error) {
+          resultDiv.textContent = "❌ Error: " + error.message;
+          resultDiv.classList.add("error");
+        }
+      }
+
+      main();
+    </script>
+
+    <script src="./node_modules/@alephium/web3-wallet/dist/alephium-web3-wallet.min.js"></script>
+    <script>
+      async function main() {
+        const resultDiv = document.getElementById("result-web3-wallet-umd");
+
+        try {
+          const wallet = new alephium.PrivateKeyWallet({
+            privateKey: "a642942e67258589cd2b1822c631506632db5a12aabcf413604e785300d762a5",
+          });
+          resultDiv.textContent = "✅ Wallet address through UMD: " + wallet.address;
+        } catch (error) {
+          resultDiv.textContent = "❌ Error: " + error.message;
+          resultDiv.classList.add("error");
+        }
+      }
+
+      main();
+    </script>
+
+    <script type="module">
+      import { PrivateKeyWallet } from "./node_modules/@alephium/web3-wallet/dist/src/index.js";
+
+      async function main() {
+        const resultDiv = document.getElementById("result-web3-wallet-esm");
+
+        try {
+          const wallet = new PrivateKeyWallet({
+            privateKey: "a642942e67258589cd2b1822c631506632db5a12aabcf413604e785300d762a5",
+          });
+          resultDiv.textContent = "✅ Wallet address through ESM: " + wallet.address;
         } catch (error) {
           resultDiv.textContent = "❌ Error: " + error.message;
           resultDiv.classList.add("error");
