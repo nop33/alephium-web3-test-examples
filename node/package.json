@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@alephium/web3": "^1.11.7"
+    "@alephium/web3": "^1.11.8-test.0",
+    "@alephium/web3-wallet": "^1.11.8-test.0"
   }
 }

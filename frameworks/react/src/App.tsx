@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { NodeProvider } from "@alephium/web3";
 import "./App.css";
+import { AlephiumConnectButton, AlephiumWalletProvider } from "@alephium/web3-react";
+// import { PrivateKeyWallet } from "@alephium/web3-wallet";
 
 function App() {
   const [balance, setBalance] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  // const [walletAddress, setWalletAddress] = useState<string | null>(null);
+
 
   useEffect(() => {
     const fetchBalance = async () => {
@@ -22,6 +26,12 @@ function App() {
       }
     };
     fetchBalance();
+
+    // const wallet = new PrivateKeyWallet({
+    //   privateKey: "a642942e67258589cd2b1822c631506632db5a12aabcf413604e785300d762a5",
+    // });
+
+    // setWalletAddress(wallet.address);
   }, []);
 
   return (
@@ -33,6 +43,12 @@ function App() {
       {balance && <div className="result">✅ Balance: {balance}</div>}
       {error && <div className="result error">❌ Error: {error}</div>}
       {!balance && !error && <div className="result">Loading...</div>}
+
+      {/* {walletAddress && <div className="result">✅ Wallet Address: {walletAddress}</div>} */}
+
+      <AlephiumWalletProvider theme="retro" network="devnet" addressGroup={0}>
+        <AlephiumConnectButton />
+      </AlephiumWalletProvider>
     </div>
   );
 }

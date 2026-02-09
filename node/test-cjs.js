@@ -1,4 +1,5 @@
 const { NodeProvider } = require("@alephium/web3");
+const { PrivateKeyWallet } = require("@alephium/web3-wallet");
 
 async function main() {
   const provider = new NodeProvider("https://node.mainnet.alephium.org");
@@ -10,6 +11,11 @@ async function main() {
   } catch (error) {
     console.error("❌ Error:", error);
   }
+
+  const wallet = new PrivateKeyWallet({
+    privateKey: "a642942e67258589cd2b1822c631506632db5a12aabcf413604e785300d762a5",
+  });
+  console.log("✅ Wallet address through CJS:", wallet.address);
 }
 
 main();
